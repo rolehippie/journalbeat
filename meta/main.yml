@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Thomas Boerger
+  description: Ansible role to configure journalbeat
+  license: Apache-2.0
+  min_ansible_version: 2.5
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+    - bionic
+  galaxy_tags:
+  - journalbeat
+  - elastic
+
+dependencies: []

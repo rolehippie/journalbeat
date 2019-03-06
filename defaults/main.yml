@@ -1,0 +1,2 @@
+journalbeat_service_state: stopped
+journalbeat_service_enabled: False
