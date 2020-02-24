@@ -1,4 +1,6 @@
-- name: download key
+# Standards: 0.1
+---
+- name: Download repo key
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -6,7 +8,7 @@
   tags:
     - journalbeat
 
-- name: add repository
+- name: Add apt repository
   apt_repository:
     repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
     filename: elastic
@@ -15,8 +17,8 @@
   tags:
     - journalbeat
 
-- name: install packages
-  with_items:
+- name: Install required packages
+  loop:
     - journalbeat
   package:
     name: '{{ item }}'
@@ -24,7 +26,7 @@
   tags:
     - journalbeat
 
-- name: start service
+- name: Start journalbeat service
   systemd:
     name: journalbeat
     state: '{{ journalbeat_service_state }}'
@@ -33,3 +35,5 @@
     enabled: '{{ journalbeat_service_enabled }}'
   tags:
     - journalbeat
+
+...
