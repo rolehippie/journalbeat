@@ -1,2 +1,9 @@
+# Standards: 0.1
+---
+# @var journalbeat_service_state:description: State for the service definition
 journalbeat_service_state: stopped
+
+# @var journalbeat_service_enabled:description: Switch the service into enabled state
 journalbeat_service_enabled: False
+
+...
