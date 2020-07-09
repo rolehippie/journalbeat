@@ -1,9 +1,59 @@
 # Standards: 0.1
 ---
+# @var journalbeat_major_version:description: Major version to install, used for the APT repository
+journalbeat_major_version: 7
+
+# @var journalbeat_configuration_enabled:description: Enable configuration of the service at all
+journalbeat_configuration_enabled: True
+
 # @var journalbeat_service_state:description: State for the service definition
-journalbeat_service_state: stopped
+journalbeat_service_state: started
 
 # @var journalbeat_service_enabled:description: Switch the service into enabled state
-journalbeat_service_enabled: False
+journalbeat_service_enabled: True
+
+# @var journalbeat_name:description: Name of the shipper within the output
+journalbeat_name: "{{ ansible_hostname }}"
+
+# @var journalbeat_tags:description: List of tags to assign for the shipper
+journalbeat_tags: []
+
+# @var journalbeat_default_inputs:description: List of default inputs, gets directly transformed to yaml
+journalbeat_default_inputs:
+  - paths: []
+    seek: cursor
+
+# @var journalbeat_group_inputs:description: List of group inputs, merged with journalbeat_default_inputs
+journalbeat_group_inputs: []
+
+# @var journalbeat_host_inputs:description: List of host inputs, merged with journalbeat_default_inputs
+journalbeat_host_inputs: []
+
+# @var journalbeat_default_processors:description: List of default processors, gets directly transformed to yaml
+journalbeat_default_processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+
+# @var journalbeat_group_processors:description: List of group processors, merged with journalbeat_default_processors
+journalbeat_group_processors: []
+
+# @var journalbeat_host_processors:description: List of host processors, merged with journalbeat_default_processors
+journalbeat_host_processors: []
+
+# @var journalbeat_service_enabled:description: Enable the logstash output
+journalbeat_logstash_enabled: True
+
+# @var journalbeat_service_enabled:description: List of hosts for logstash output
+journalbeat_logstash_hosts: []
+
+# @var journalbeat_service_enabled:description: Enable the console output
+journalbeat_console_enabled: False
+
+# @var journalbeat_logging_level:description: Define logging level
+journalbeat_logging_level: info
+
+# @var journalbeat_logging_selectors:description: Define logging selectors, like beat, publish, service
+journalbeat_logging_selectors: []
 
 ...

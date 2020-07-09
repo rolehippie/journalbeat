@@ -10,7 +10,7 @@
 
 - name: Add apt repository
   apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
     filename: elastic
     update_cache: True
     state: present
@@ -23,6 +23,28 @@
   package:
     name: "{{ item }}"
     state: present
+  tags:
+    - journalbeat
+
+- name: Apply general configuration
+  when: journalbeat_configuration_enabled
+  block:
+    - name: Drop reference config
+      file:
+        path: /etc/journalbeat/journalbeat.reference.yml
+        state: absent
+      tags:
+        - journalbeat
+
+    - name: Write general config
+      notify:
+        - Restart journalbeat
+      template:
+        src: config.j2
+        dest: /etc/journalbeat/journalbeat.yml
+        validate: journalbeat test config -d -c %s
+      tags:
+        - journalbeat
   tags:
     - journalbeat
 

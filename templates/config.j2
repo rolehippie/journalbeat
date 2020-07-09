@@ -1,0 +1,20 @@
+name: {{ journalbeat_name }}
+tags: {{ journalbeat_tags | to_yaml | trim }}
+
+journalbeat.inputs:
+  {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, indentfirst=False) | trim }}
+{% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
+
+processors:
+  {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, indentfirst=False) | trim }}
+{% endif %}
+
+output.logstash:
+  enabled: {{ journalbeat_logstash_enabled | lower }}
+  hosts: {{ journalbeat_logstash_hosts | to_yaml | trim }}
+
+output.console:
+  enabled: {{ journalbeat_console_enabled | lower }}
+
+logging.level: {{ journalbeat_logging_level }}
+logging.selectors: {{ journalbeat_logging_selectors | to_yaml | trim }}
