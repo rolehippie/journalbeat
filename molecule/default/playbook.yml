@@ -1,8 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  vars:
-    journalbeat_service_state: started
-    journalbeat_service_enabled: True
   roles:
     - role: journalbeat
