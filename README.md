@@ -7,7 +7,6 @@ Ansible role to configure journalbeat
 ## Table of content
 
 * [Default Variables](#default-variables)
-  * [journalbeat_configuration_enabled](#journalbeat_configuration_enabled)
   * [journalbeat_console_enabled](#journalbeat_console_enabled)
   * [journalbeat_default_inputs](#journalbeat_default_inputs)
   * [journalbeat_default_processors](#journalbeat_default_processors)
@@ -22,7 +21,6 @@ Ansible role to configure journalbeat
   * [journalbeat_major_version](#journalbeat_major_version)
   * [journalbeat_name](#journalbeat_name)
   * [journalbeat_service_enabled](#journalbeat_service_enabled)
-  * [journalbeat_service_state](#journalbeat_service_state)
   * [journalbeat_tags](#journalbeat_tags)
 * [Dependencies](#dependencies)
 * [License](#license)
@@ -31,16 +29,6 @@ Ansible role to configure journalbeat
 ---
 
 ## Default Variables
-
-### journalbeat_configuration_enabled
-
-Enable configuration of the service at all
-
-#### Default value
-
-```YAML
-journalbeat_configuration_enabled: true
-```
 
 ### journalbeat_console_enabled
 
@@ -174,22 +162,6 @@ journalbeat_name: '{{ ansible_hostname }}'
 ### journalbeat_service_enabled
 
 Enable the console output
-
-#### Default value
-
-```YAML
-journalbeat_service_enabled: true
-```
-
-### journalbeat_service_state
-
-State for the service definition
-
-#### Default value
-
-```YAML
-journalbeat_service_state: started
-```
 
 ### journalbeat_tags
 

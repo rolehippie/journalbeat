@@ -1,7 +1,6 @@
 # Standards: 0.1
 ---
 - name: Restart journalbeat
-  when: journalbeat_service_state == 'started' and journalbeat_service_enabled
   systemd:
     name: journalbeat
     state: restarted

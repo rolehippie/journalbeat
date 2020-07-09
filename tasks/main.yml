@@ -26,35 +26,30 @@
   tags:
     - journalbeat
 
-- name: Apply general configuration
-  when: journalbeat_configuration_enabled
-  block:
-    - name: Drop reference config
-      file:
-        path: /etc/journalbeat/journalbeat.reference.yml
-        state: absent
-      tags:
-        - journalbeat
+- name: Drop reference config
+  file:
+    path: /etc/journalbeat/journalbeat.reference.yml
+    state: absent
+  tags:
+    - journalbeat
 
-    - name: Write general config
-      notify:
-        - Restart journalbeat
-      template:
-        src: config.j2
-        dest: /etc/journalbeat/journalbeat.yml
-        validate: journalbeat test config -d -c %s
-      tags:
-        - journalbeat
+- name: Write general config
+  notify:
+    - Restart journalbeat
+  template:
+    src: config.j2
+    dest: /etc/journalbeat/journalbeat.yml
+    validate: journalbeat test config -d -c %s
   tags:
     - journalbeat
 
 - name: Start journalbeat service
   systemd:
     name: journalbeat
-    state: "{{ journalbeat_service_state }}"
+    state: started
     daemon_reload: True
     masked: False
-    enabled: "{{ journalbeat_service_enabled }}"
+    enabled: True
   tags:
     - journalbeat
 
