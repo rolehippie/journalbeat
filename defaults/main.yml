@@ -42,7 +42,10 @@ journalbeat_logstash_hosts: []
 journalbeat_console_enabled: False
 
 # @var journalbeat_logging_level:description: Define logging level
-journalbeat_logging_level: info
+journalbeat_logging_level: warning
+
+# @var journalbeat_logging_to_files:description: Log to files, keep journal clean
+journalbeat_logging_to_files: True
 
 # @var journalbeat_logging_selectors:description: Define logging selectors, like beat, publish, service
 journalbeat_logging_selectors: []

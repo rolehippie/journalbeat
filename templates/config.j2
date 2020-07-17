@@ -17,4 +17,5 @@ output.console:
   enabled: {{ journalbeat_console_enabled | lower }}
 
 logging.level: {{ journalbeat_logging_level }}
+logging.to_files: {{ journalbeat_logging_to_files | lower }}
 logging.selectors: {{ journalbeat_logging_selectors | to_yaml | trim }}

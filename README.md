@@ -16,6 +16,7 @@ Ansible role to configure journalbeat
   * [journalbeat_host_processors](#journalbeat_host_processors)
   * [journalbeat_logging_level](#journalbeat_logging_level)
   * [journalbeat_logging_selectors](#journalbeat_logging_selectors)
+  * [journalbeat_logging_to_files](#journalbeat_logging_to_files)
   * [journalbeat_logstash_enabled](#journalbeat_logstash_enabled)
   * [journalbeat_logstash_hosts](#journalbeat_logstash_hosts)
   * [journalbeat_major_version](#journalbeat_major_version)
@@ -110,7 +111,7 @@ Define logging level
 #### Default value
 
 ```YAML
-journalbeat_logging_level: info
+journalbeat_logging_level: warning
 ```
 
 ### journalbeat_logging_selectors
@@ -121,6 +122,16 @@ Define logging selectors, like beat, publish, service
 
 ```YAML
 journalbeat_logging_selectors: []
+```
+
+### journalbeat_logging_to_files
+
+Log to files, keep journal clean
+
+#### Default value
+
+```YAML
+journalbeat_logging_to_files: true
 ```
 
 ### journalbeat_logstash_enabled
