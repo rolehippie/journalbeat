@@ -1,0 +1,11 @@
+# Standards: 1.2
+---
+- name: Converge
+  hosts: all
+  vars:
+    journalbeat_logstash_enabled: False
+    journalbeat_console_enabled: True
+  roles:
+    - role: journalbeat
+
+...
