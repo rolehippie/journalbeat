@@ -1,4 +1,4 @@
-# Standards: 0.1
+# Standards: 1.2
 ---
 # @var journalbeat_major_version:description: Major version to install, used for the APT repository
 journalbeat_major_version: 7
