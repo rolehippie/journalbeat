@@ -2,11 +2,11 @@ name: {{ journalbeat_name }}
 tags: {{ journalbeat_tags | to_yaml | trim }}
 
 journalbeat.inputs:
-  {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, indentfirst=False) | trim }}
+  {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
 {% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
 
 processors:
-  {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, indentfirst=False) | trim }}
+  {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
 {% endif %}
 {% if journalbeat_logstash_enabled %}
 
