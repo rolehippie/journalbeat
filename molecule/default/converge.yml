@@ -6,6 +6,6 @@
     journalbeat_logstash_enabled: False
     journalbeat_console_enabled: True
   roles:
-    - role: journalbeat
+    - role: rolehippie.journalbeat
 
 ...
