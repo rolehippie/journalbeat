@@ -1,6 +1,11 @@
 # journalbeat
 
-[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/journalbeat) [![General Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml) [![Readme Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/readme.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/readme.yml) [![Galaxy Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/galaxy.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/galaxy.yml) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/journalbeat)](https://github.com/rolehippie/journalbeat/blob/master/LICENSE) [![Ansible Role](https://img.shields.io/ansible/role/51426)](https://galaxy.ansible.com/rolehippie/journalbeat)
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&amp;logoColor=white)](https://github.com/rolehippie/journalbeat)
+[![General Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml)
+[![Readme Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/readme.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/readme.yml)
+[![Galaxy Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/galaxy.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/galaxy.yml)
+[![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/journalbeat)](https://github.com/rolehippie/journalbeat/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/badge/role-rolehippie.journalbeat-blue)](https://galaxy.ansible.com/rolehippie/journalbeat)
 
 Ansible role to install and configure journalbeat.
 
