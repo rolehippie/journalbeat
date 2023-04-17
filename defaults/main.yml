@@ -50,4 +50,7 @@ journalbeat_logging_to_files: True
 # @var journalbeat_logging_selectors:description: Define logging selectors, like beat, publish, service
 journalbeat_logging_selectors: []
 
+# @var journalbeat_keyring:description: Path for the repository keyring
+journalbeat_keyring: /usr/share/keyrings/elastic-archive-keyring.gpg
+
 ...

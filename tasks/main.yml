@@ -1,16 +1,31 @@
 # Standards: 1.2
 ---
-- name: Download repo key
+- name: Remove legacy key
   apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
-    state: present
+    state: absent
+  tags:
+    - journalbeat
+
+- name: Remove legacy repo
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
+    filename: elastic
+    update_cache: False
+    state: absent
+  tags:
+    - journalbeat
+
+- name: Download repo key
+  shell:
+    cmd: "curl -sSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor --output {{ journalbeat_keyring }}"
+    creates: "{{ journalbeat_keyring }}"
   tags:
     - journalbeat
 
 - name: Add apt repository
   apt_repository:
-    repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
+    repo: "deb [signed-by={{ journalbeat_keyring }}] https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
     filename: elastic
     update_cache: True
     state: present
