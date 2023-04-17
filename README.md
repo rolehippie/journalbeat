@@ -24,6 +24,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [journalbeat_group_processors](#journalbeat_group_processors)
   - [journalbeat_host_inputs](#journalbeat_host_inputs)
   - [journalbeat_host_processors](#journalbeat_host_processors)
+  - [journalbeat_keyring](#journalbeat_keyring)
   - [journalbeat_logging_level](#journalbeat_logging_level)
   - [journalbeat_logging_selectors](#journalbeat_logging_selectors)
   - [journalbeat_logging_to_files](#journalbeat_logging_to_files)
@@ -118,6 +119,16 @@ List of host processors, merged with journalbeat_default_processors
 
 ```YAML
 journalbeat_host_processors: []
+```
+
+### journalbeat_keyring
+
+Path for the repository keyring
+
+#### Default value
+
+```YAML
+journalbeat_keyring: /usr/share/keyrings/elastic-archive-keyring.gpg
 ```
 
 ### journalbeat_logging_level
