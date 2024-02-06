@@ -1,13 +1,13 @@
 ---
 - name: Remove legacy key
-  apt_key:
+  ansible.builtin.apt_key:
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
     state: absent
   tags:
     - journalbeat
 
 - name: Remove legacy repo
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
     filename: elastic
     update_cache: False
@@ -16,14 +16,14 @@
     - journalbeat
 
 - name: Download repo key
-  shell:
+  ansible.builtin.shell:
     cmd: "curl -sSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor --output {{ journalbeat_keyring }}"
     creates: "{{ journalbeat_keyring }}"
   tags:
     - journalbeat
 
 - name: Add apt repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ journalbeat_keyring }}] https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
     filename: elastic
     update_cache: True
@@ -34,14 +34,14 @@
 - name: Install required packages
   loop:
     - journalbeat
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   tags:
     - journalbeat
 
 - name: Drop reference config
-  file:
+  ansible.builtin.file:
     path: /etc/journalbeat/journalbeat.reference.yml
     state: absent
   tags:
@@ -50,7 +50,7 @@
 - name: Write general config
   notify:
     - Restart journalbeat
-  template:
+  ansible.builtin.template:
     src: config.j2
     dest: /etc/journalbeat/journalbeat.yml
     validate: journalbeat test config -d -c %s
@@ -61,7 +61,7 @@
     - journalbeat
 
 - name: Start journalbeat service
-  systemd:
+  ansible.builtin.systemd:
     name: journalbeat
     state: started
     daemon_reload: True
