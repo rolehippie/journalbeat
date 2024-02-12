@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.0](https://github.com/rolehippie/journalbeat/compare/v1.1.0...v2.0.0) (2024-02-12)
+
+
+### Features
+
+* drop support for ubuntu 18.04 ([46e721f](https://github.com/rolehippie/journalbeat/commit/46e721f95fcdf4482f045e6b04e1bdc763d7bf24))
+* used full qualified collection names ([4739eab](https://github.com/rolehippie/journalbeat/commit/4739eab11b6079da48d24ba93ea227dae80d942e))
+
 ## [1.1.0](https://github.com/rolehippie/journalbeat/compare/v1.0.0...v1.1.0) (2023-04-17)
 
 
