@@ -50,8 +50,8 @@
 - name: Write general config
   notify:
     - Restart journalbeat
-  ansible.builtin.template:
-    src: config.j2
+  ansible.builtin.copy:
+    content: "{{ journalbeat_config_combined }}"
     dest: /etc/journalbeat/journalbeat.yml
     validate: journalbeat test config -d -c %s
     owner: root
