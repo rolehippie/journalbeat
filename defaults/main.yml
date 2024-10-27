@@ -52,4 +52,53 @@ journalbeat_logging_selectors: []
 # @var journalbeat_keyring:description: Path for the repository keyring
 journalbeat_keyring: /usr/share/keyrings/elastic-archive-keyring.gpg
 
+# @var journalbeat_config_inputs:description: Config related to inputs
+journalbeat_config_inputs: |
+  journalbeat.inputs:
+    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+
+# @var journalbeat_config_procs:description: Config related to processors
+journalbeat_config_procs: |
+  {% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
+  processors:
+    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+  {% endif %}
+
+# @var journalbeat_config_outputs:description: Config related to outputs
+journalbeat_config_outputs: |
+  {% if journalbeat_logstash_enabled %}
+  output.logstash:
+    enabled: {{ journalbeat_logstash_enabled | lower }}
+    hosts: {{ journalbeat_logstash_hosts | to_yaml | trim }}
+  {% endif %}
+  {% if journalbeat_console_enabled %}
+  output.console:
+    enabled: {{ journalbeat_console_enabled | lower }}
+  {% endif %}
+
+# @var journalbeat_config_logging:description: Config related to logging
+journalbeat_config_logging: |
+  logging.level: {{ journalbeat_logging_level }}
+  logging.to_files: {{ journalbeat_logging_to_files | lower }}
+  logging.selectors: {{ journalbeat_logging_selectors | to_yaml | trim }}
+
+# @var journalbeat_config_combined:description: Combines the config components
+journalbeat_config_combined: |
+  name: {{ journalbeat_name }}
+  tags: {{ journalbeat_tags | to_yaml | trim }}
+  {% if journalbeat_config_inputs | trim | default(False) %}
+
+  {{ journalbeat_config_inputs | trim }}
+  {% endif %}
+  {% if journalbeat_config_outputs | trim | default(False) %}
+
+  {{ journalbeat_config_outputs | trim }}
+  {% endif %}
+  {% if journalbeat_config_procs | trim | default(False) %}
+
+  {{ journalbeat_config_procs | trim }}
+  {% endif %}
+
+  {{ journalbeat_config_logging | trim }}
+
 ...
