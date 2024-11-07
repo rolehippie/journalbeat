@@ -17,6 +17,11 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
+  - [journalbeat_config_combined](#journalbeat_config_combined)
+  - [journalbeat_config_inputs](#journalbeat_config_inputs)
+  - [journalbeat_config_logging](#journalbeat_config_logging)
+  - [journalbeat_config_outputs](#journalbeat_config_outputs)
+  - [journalbeat_config_procs](#journalbeat_config_procs)
   - [journalbeat_console_enabled](#journalbeat_console_enabled)
   - [journalbeat_default_inputs](#journalbeat_default_inputs)
   - [journalbeat_default_processors](#journalbeat_default_processors)
@@ -46,6 +51,90 @@ Building and improving this Ansible role have been sponsored by my current and p
 - Minimum Ansible version: `2.10`
 
 ## Default Variables
+
+### journalbeat_config_combined
+
+Combines the config components
+
+#### Default value
+
+```YAML
+journalbeat_config_combined: |
+  name: {{ journalbeat_name }}
+  tags: {{ journalbeat_tags | to_yaml | trim }}
+  {% if journalbeat_config_inputs | trim | default(False) %}
+
+  {{ journalbeat_config_inputs | trim }}
+  {% endif %}
+  {% if journalbeat_config_outputs | trim | default(False) %}
+
+  {{ journalbeat_config_outputs | trim }}
+  {% endif %}
+  {% if journalbeat_config_procs | trim | default(False) %}
+
+  {{ journalbeat_config_procs | trim }}
+  {% endif %}
+
+  {{ journalbeat_config_logging | trim }}
+```
+
+### journalbeat_config_inputs
+
+Config related to inputs
+
+#### Default value
+
+```YAML
+journalbeat_config_inputs: |
+  journalbeat.inputs:
+    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+```
+
+### journalbeat_config_logging
+
+Config related to logging
+
+#### Default value
+
+```YAML
+journalbeat_config_logging: |
+  logging.level: {{ journalbeat_logging_level }}
+  logging.to_files: {{ journalbeat_logging_to_files | lower }}
+  logging.selectors: {{ journalbeat_logging_selectors | to_yaml | trim }}
+```
+
+### journalbeat_config_outputs
+
+Config related to outputs
+
+#### Default value
+
+```YAML
+journalbeat_config_outputs: |
+  {% if journalbeat_logstash_enabled %}
+  output.logstash:
+    enabled: {{ journalbeat_logstash_enabled | lower }}
+    hosts: {{ journalbeat_logstash_hosts | to_yaml | trim }}
+  {% endif %}
+  {% if journalbeat_console_enabled %}
+  output.console:
+    enabled: {{ journalbeat_console_enabled | lower }}
+  {% endif %}
+```
+
+### journalbeat_config_procs
+
+Config related to processors
+
+#### Default value
+
+```YAML
+journalbeat_config_procs: |
+  {% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
+  processors:
+    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+  {% endif %}
+```
 
 ### journalbeat_console_enabled
 
