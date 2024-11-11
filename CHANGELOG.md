@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/rolehippie/journalbeat/compare/v2.0.0...v2.1.0) (2024-11-11)
+
+
+### Features
+
+* generate config from defaults definition ([de32f7a](https://github.com/rolehippie/journalbeat/commit/de32f7a28490efdab50942ec7823936183e95912))
+
 ## [2.0.0](https://github.com/rolehippie/journalbeat/compare/v1.1.0...v2.0.0) (2024-02-12)
 
 
