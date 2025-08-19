@@ -1,4 +1,4 @@
-# journalbeat
+# workspace
 
 [![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/journalbeat)
 [![General Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml)
@@ -302,7 +302,6 @@ journalbeat_tags: []
 ## Discovered Tags
 
 **_journalbeat_**
-
 
 ## Dependencies
 
