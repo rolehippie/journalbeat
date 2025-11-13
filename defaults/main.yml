@@ -32,22 +32,25 @@ journalbeat_group_processors: []
 journalbeat_host_processors: []
 
 # @var journalbeat_service_enabled:description: Enable the logstash output
-journalbeat_logstash_enabled: True
+journalbeat_logstash_enabled: true
 
 # @var journalbeat_service_enabled:description: List of hosts for logstash output
 journalbeat_logstash_hosts: []
 
 # @var journalbeat_service_enabled:description: Enable the console output
-journalbeat_console_enabled: False
+journalbeat_console_enabled: false
 
 # @var journalbeat_logging_level:description: Define logging level
 journalbeat_logging_level: warning
 
 # @var journalbeat_logging_to_files:description: Log to files, keep journal clean
-journalbeat_logging_to_files: True
+journalbeat_logging_to_files: true
 
 # @var journalbeat_logging_selectors:description: Define logging selectors, like beat, publish, service
 journalbeat_logging_selectors: []
+
+# @var journalbeat_test_config_command:description: Command to test the configuration
+journalbeat_test_config_command: journalbeat test config -d -c %s
 
 # @var journalbeat_keyring:description: Path for the repository keyring
 journalbeat_keyring: /usr/share/keyrings/elastic-archive-keyring.gpg
@@ -55,13 +58,13 @@ journalbeat_keyring: /usr/share/keyrings/elastic-archive-keyring.gpg
 # @var journalbeat_config_inputs:description: Config related to inputs
 journalbeat_config_inputs: |
   journalbeat.inputs:
-    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=false) | trim }}
 
 # @var journalbeat_config_procs:description: Config related to processors
 journalbeat_config_procs: |
   {% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
   processors:
-    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=false) | trim }}
   {% endif %}
 
 # @var journalbeat_config_outputs:description: Config related to outputs
@@ -86,15 +89,15 @@ journalbeat_config_logging: |
 journalbeat_config_combined: |
   name: {{ journalbeat_name }}
   tags: {{ journalbeat_tags | to_yaml | trim }}
-  {% if journalbeat_config_inputs | trim | default(False) %}
+  {% if journalbeat_config_inputs | trim | default(false) %}
 
   {{ journalbeat_config_inputs | trim }}
   {% endif %}
-  {% if journalbeat_config_outputs | trim | default(False) %}
+  {% if journalbeat_config_outputs | trim | default(false) %}
 
   {{ journalbeat_config_outputs | trim }}
   {% endif %}
-  {% if journalbeat_config_procs | trim | default(False) %}
+  {% if journalbeat_config_procs | trim | default(false) %}
 
   {{ journalbeat_config_procs | trim }}
   {% endif %}

@@ -1,4 +1,13 @@
 ---
+- name: Remove legacy repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
+    filename: elastic
+    update_cache: false
+    state: absent
+  tags:
+    - journalbeat
+
 - name: Remove legacy key
   ansible.builtin.apt_key:
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -6,19 +15,30 @@
   tags:
     - journalbeat
 
-- name: Remove legacy repo
-  ansible.builtin.apt_repository:
-    repo: "deb https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
-    filename: elastic
-    update_cache: False
-    state: absent
+- name: Download repo key
+  register: journalbeat_key_download
+  ansible.builtin.get_url:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    dest: "{{ journalbeat_keyring }}.asc"
+    mode: u=rw,g=r,o=r
+    force: true
   tags:
     - journalbeat
 
-- name: Download repo key
-  ansible.builtin.shell:
-    cmd: "curl -sSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor --output {{ journalbeat_keyring }}"
-    creates: "{{ journalbeat_keyring }}"
+- name: Check repo key
+  register: journalbeat_key_status
+  ansible.builtin.stat:
+    path: "{{ journalbeat_keyring }}"
+  tags:
+    - journalbeat
+
+- name: Dearmor repo key
+  when:
+    - journalbeat_key_download.changed or not journalbeat_key_status.stat.exists
+  register: journalbeat_key_convert
+  changed_when: journalbeat_key_convert.rc == 0
+  ansible.builtin.command:
+    cmd: "gpg --dearmor -o {{ journalbeat_keyring }} {{ journalbeat_keyring }}.asc"
   tags:
     - journalbeat
 
@@ -26,7 +46,7 @@
   ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ journalbeat_keyring }}] https://artifacts.elastic.co/packages/{{ journalbeat_major_version }}.x/apt stable main"
     filename: elastic
-    update_cache: True
+    update_cache: true
     state: present
   tags:
     - journalbeat
@@ -53,7 +73,7 @@
   ansible.builtin.copy:
     content: "{{ journalbeat_config_combined }}"
     dest: /etc/journalbeat/journalbeat.yml
-    validate: journalbeat test config -d -c %s
+    validate: "{{ journalbeat_test_config_command }}"
     owner: root
     group: root
     mode: u=rw,g=,o=
@@ -64,9 +84,9 @@
   ansible.builtin.systemd:
     name: journalbeat
     state: started
-    daemon_reload: True
-    masked: False
-    enabled: True
+    daemon_reload: true
+    masked: false
+    enabled: true
   tags:
     - journalbeat
 

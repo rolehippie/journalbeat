@@ -2,8 +2,8 @@
 - name: Converge
   hosts: all
   vars:
-    journalbeat_logstash_enabled: False
-    journalbeat_console_enabled: True
+    journalbeat_logstash_enabled: false
+    journalbeat_console_enabled: true
   roles:
     - role: rolehippie.journalbeat
 

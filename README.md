@@ -1,4 +1,4 @@
-# workspace
+# journalbeat
 
 [![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/journalbeat)
 [![General Workflow](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/journalbeat/actions/workflows/general.yml)
@@ -13,7 +13,7 @@ Ansible role to install and configure journalbeat.
 
 Building and improving this Ansible role have been sponsored by my current and previous employers like **[Cloudpunks GmbH](https://cloudpunks.de)** and **[Proact Deutschland GmbH](https://www.proact.eu)**.
 
-## Table of content
+## Table of contents
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
@@ -39,6 +39,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [journalbeat_name](#journalbeat_name)
   - [journalbeat_service_enabled](#journalbeat_service_enabled)
   - [journalbeat_tags](#journalbeat_tags)
+  - [journalbeat_test_config_command](#journalbeat_test_config_command)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -62,15 +63,15 @@ Combines the config components
 journalbeat_config_combined: |
   name: {{ journalbeat_name }}
   tags: {{ journalbeat_tags | to_yaml | trim }}
-  {% if journalbeat_config_inputs | trim | default(False) %}
+  {% if journalbeat_config_inputs | trim | default(false) %}
 
   {{ journalbeat_config_inputs | trim }}
   {% endif %}
-  {% if journalbeat_config_outputs | trim | default(False) %}
+  {% if journalbeat_config_outputs | trim | default(false) %}
 
   {{ journalbeat_config_outputs | trim }}
   {% endif %}
-  {% if journalbeat_config_procs | trim | default(False) %}
+  {% if journalbeat_config_procs | trim | default(false) %}
 
   {{ journalbeat_config_procs | trim }}
   {% endif %}
@@ -87,7 +88,7 @@ Config related to inputs
 ```YAML
 journalbeat_config_inputs: |
   journalbeat.inputs:
-    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+    {{ (journalbeat_default_inputs + journalbeat_group_inputs + journalbeat_host_inputs) | to_nice_yaml(indent=2) | indent(width=2, first=false) | trim }}
 ```
 
 ### journalbeat_config_logging
@@ -132,7 +133,7 @@ Config related to processors
 journalbeat_config_procs: |
   {% if (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | length > 0 %}
   processors:
-    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=False) | trim }}
+    {{ (journalbeat_default_processors + journalbeat_group_processors + journalbeat_host_processors) | to_nice_yaml(indent=2) | indent(width=2, first=false) | trim }}
   {% endif %}
 ```
 
@@ -297,6 +298,16 @@ List of tags to assign for the shipper
 
 ```YAML
 journalbeat_tags: []
+```
+
+### journalbeat_test_config_command
+
+Command to test the configuration
+
+#### Default value
+
+```YAML
+journalbeat_test_config_command: journalbeat test config -d -c %s
 ```
 
 ## Discovered Tags
