@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/rolehippie/journalbeat/compare/v2.1.0...v2.2.0) (2025-11-17)
+
+
+### Features
+
+* apply new repo structure and update linting ([bbb6654](https://github.com/rolehippie/journalbeat/commit/bbb665412ebba28811277c4ec3ff3d39bd94d76e))
+
 ## [2.1.0](https://github.com/rolehippie/journalbeat/compare/v2.0.0...v2.1.0) (2024-11-11)
 
 
