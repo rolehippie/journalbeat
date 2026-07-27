@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.3.0](https://github.com/rolehippie/journalbeat/compare/v2.2.0...v2.3.0) (2026-07-27)
+
 ## [2.2.0](https://github.com/rolehippie/journalbeat/compare/v2.1.0...v2.2.0) (2025-11-17)
 
 
