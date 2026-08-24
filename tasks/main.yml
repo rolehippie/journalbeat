@@ -84,7 +84,7 @@
   ansible.builtin.systemd:
     name: journalbeat
     state: started
-    daemon_reload: true
+    daemon_reload: false
     masked: false
     enabled: true
   tags:
