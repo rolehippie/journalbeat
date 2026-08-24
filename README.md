@@ -314,6 +314,8 @@ journalbeat_test_config_command: journalbeat test config -d -c %s
 
 **_journalbeat_**
 
+**_molecule-idempotence-notest_**
+
 ## Dependencies
 
 - None
