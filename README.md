@@ -283,7 +283,7 @@ Name of the shipper within the output
 #### Default value
 
 ```YAML
-journalbeat_name: '{{ ansible_hostname }}'
+journalbeat_name: '{{ ansible_facts['hostname'] }}'
 ```
 
 ### journalbeat_service_enabled

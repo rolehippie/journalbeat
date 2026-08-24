@@ -3,7 +3,7 @@
 journalbeat_major_version: 7
 
 # @var journalbeat_name:description: Name of the shipper within the output
-journalbeat_name: "{{ ansible_hostname }}"
+journalbeat_name: "{{ ansible_facts['hostname'] }}"
 
 # @var journalbeat_tags:description: List of tags to assign for the shipper
 journalbeat_tags: []

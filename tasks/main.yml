@@ -38,7 +38,7 @@
   register: journalbeat_key_convert
   changed_when: journalbeat_key_convert.rc == 0
   ansible.builtin.command:
-    cmd: "gpg --dearmor -o {{ journalbeat_keyring }} {{ journalbeat_keyring }}.asc"
+    cmd: "gpg --batch --yes --dearmor -o {{ journalbeat_keyring }} {{ journalbeat_keyring }}.asc"
   tags:
     - journalbeat
 
