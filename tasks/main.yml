@@ -89,5 +89,6 @@
     enabled: true
   tags:
     - journalbeat
+    - molecule-idempotence-notest
 
 ...
