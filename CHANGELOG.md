@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.4.0](https://github.com/rolehippie/journalbeat/compare/v2.3.0...v2.4.0) (2026-08-31)
+
+### Features
+
+* use new facts and improve gpg dearmor ([d0f1289](https://github.com/rolehippie/journalbeat/commit/d0f1289bf34a25e03db7cbf0c45140fc06105ea6))
+
+### Bugfixes
+
+* disable idempotence for systemd service ([22c9f3d](https://github.com/rolehippie/journalbeat/commit/22c9f3db649e78a1629f37b2661deb65d56645af))
+* do not reload daemon to resolve idempotence issues ([8d12285](https://github.com/rolehippie/journalbeat/commit/8d12285a06264380d2f765265924df5a0e3686f9))
+
 ## [2.3.0](https://github.com/rolehippie/journalbeat/compare/v2.2.0...v2.3.0) (2026-07-27)
 
 ## [2.2.0](https://github.com/rolehippie/journalbeat/compare/v2.1.0...v2.2.0) (2025-11-17)
